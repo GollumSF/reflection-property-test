@@ -12,6 +12,8 @@ composer require gollumsf/reflection-property-test
 
 ```php
 
+use GollumSF\ReflectionPropertyTest\ReflectionPropertyTrait;
+
 class MyPrivate {
 	private $dataPrivate = 10;
 	private function functionPrivate($value) {
@@ -23,6 +25,8 @@ class MyExtend extends MyPrivate {
 }
 
 class MyTest extends TestCase {
+	
+	use ReflectionPropertyTrait;
 	
 	testMyFunction() {
 		$obj = new MyPrivate();
