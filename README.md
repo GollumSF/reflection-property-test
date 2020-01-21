@@ -2,6 +2,11 @@
 
 Add trait for reflection data
 
+## Install:
+
+```
+composer require gollumsf/reflection-property-test
+```
 
 ## Usage:
 
