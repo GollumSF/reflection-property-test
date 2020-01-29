@@ -36,7 +36,7 @@ trait ReflectionPropertyTrait
     {
         if (!$objClass) {
             $objClass = get_class($obj);
-            if (strpos($objClass, 'Proxies\__CG__\App\Entity') === 0) {
+            if (is_subclass_of($objClass, 'Doctrine\\Persistence\\Proxy')) {
                 $objClass = get_parent_class($objClass);
             }
         }
