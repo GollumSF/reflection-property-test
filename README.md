@@ -45,12 +45,12 @@ class MyTest extends TestCase {
 		$this->assertEqual($this->reflectionGetValue($obj, 'functionPrivate', [ 19 ]), 30);
 		
 		$obj2 = new MyExtend();
-		$this->assertEqual($this->reflectionGetValue($obj2, 'reflectionGetValue'), 10, MyPrivate::class);
+		$this->assertEqual($this->reflectionGetValue($obj2, 'reflectionGetValue', MyPrivate::class), 10);
 		
-		$this->reflectionSetValue($obj, 'reflectionGetValue', 20, MyPrivate::class);
-		$this->assertEqual($this->reflectionGetValue($obj2, 'reflectionGetValue'), 20, MyPrivate::class);
+		$this->reflectionSetValue($obj2, 'reflectionGetValue', 20, MyPrivate::class);
+		$this->assertEqual($this->reflectionGetValue($obj2, 'reflectionGetValue', MyPrivate::class), 20);
 		
-		$this->assertEqual($this->reflectionGetValue($obj2, 'functionPrivate', [ 19 ]), 30, MyPrivate::class);
+		$this->assertEqual($this->reflectionGetValue($obj2, 'functionPrivate', [ 19 ], MyPrivate::class), 30);
 	}
 	
 }
