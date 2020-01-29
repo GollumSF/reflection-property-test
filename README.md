@@ -1,5 +1,12 @@
 # Reflection Property Test
 
+[![Build Status](https://travis-ci.org/GollumSF/reflection-property-test.svg?branch=master)](https://travis-ci.org/GollumSF/reflection-property-test)
+[![Coverage](https://coveralls.io/repos/github/GollumSF/reflection-property-test/badge.svg?branch=master)](https://coveralls.io/github/GollumSF/reflection-property-test)
+[![License](https://poser.pugx.org/gollumsf/reflection-property-test/license)](https://packagist.org/packages/gollumsf/reflection-property-test)
+[![Latest Stable Version](https://poser.pugx.org/gollumsf/reflection-property-test/v/stable)](https://packagist.org/packages/gollumsf/reflection-property-test)
+[![Latest Unstable Version](https://poser.pugx.org/gollumsf/reflection-property-test/v/unstable)](https://packagist.org/packages/gollumsf/reflection-property-test)
+[![Discord](https://img.shields.io/discord/671741944149573687?color=purple&label=discord)](https://discord.gg/xMBc5SQ)
+
 Add trait for reflection data
 
 ## Install:

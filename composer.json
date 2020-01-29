@@ -1,7 +1,7 @@
 {
     "name": "gollumsf/reflection-property-test",
     "type": "library",
-    "description": "Add trait for reflection data",
+    "description": "Add trait for reflection data and call",
     "keywords" : [
         "test",
         "reflection",
@@ -23,5 +23,14 @@
         "psr-4" : {
             "GollumSF\\ReflectionPropertyTest\\" : "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\GollumSF\\RestDocBundle\\" : "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "doctrine/orm": "*"
     }
 }
