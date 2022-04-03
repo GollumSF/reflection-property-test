@@ -18,7 +18,7 @@ trait ReflectionPropertyTrait
         return $rProp->getValue($obj);
     }
 
-    public function reflectionSetValue($obj, string $propertyKey, $value, $objClass = null): void
+    public function reflectionSetValue($obj, string $propertyKey, $value, $objClass = null)
     {
         if (!$objClass) {
             $objClass = get_class($obj);
