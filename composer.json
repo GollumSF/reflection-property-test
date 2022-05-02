@@ -8,7 +8,7 @@
         "gollumsf"
     ],
     "homepage": "https://github.com/GollumSF/reflection-property-test",
-    "license": "GPL-3.0-or-later",
+    "license": "MIT",
     "authors": [
         {
             "name": "Damien Duboeuf",
