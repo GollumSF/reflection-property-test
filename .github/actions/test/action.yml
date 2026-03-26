@@ -1,0 +1,72 @@
+
+name: 'Test'
+description: "Run test bundle"
+inputs:
+  php_version:
+    description: 'Set php version'
+    required: true
+    default: '8.2'
+  composer_flags:
+    description: 'Composer extra args'
+    required: true
+    default: ''
+  github_token:
+    description: 'Token for deploy coverage'
+    required: true
+  discord_webhook:
+    description: 'Discord webhook'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php_version }}
+        coverage: xdebug
+
+    - name: Update composer
+      shell: bash
+      run: composer self-update
+
+    - name: Validate composer.json and composer.lock
+      shell: bash
+      run: composer validate
+
+    - name: Install dependencies
+      shell: bash
+      run: composer update --prefer-dist --no-interaction --no-audit ${{ inputs.composer_flags }}
+
+    - name: Run tests
+      shell: bash
+      run: |
+        mkdir -p build/logs
+        XDEBUG_MODE=coverage php -d memory_limit=-1 vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+
+    - name: Upload coverage results to Coveralls
+      if: success()
+      env:
+        COVERALLS_REPO_TOKEN: ${{ inputs.github_token }}
+      shell: bash
+      run: |
+        composer global require php-coveralls/php-coveralls
+        php-coveralls --coverage_clover=build/logs/clover.xml -v
+
+    - name: Notify discord success
+      uses: th0th/notify-discord@v0.4.1
+      if: ${{ success() }}
+      env:
+        DISCORD_WEBHOOK_URL: ${{ inputs.discord_webhook }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_JOB_NAME: "Build and deploy"
+        GITHUB_JOB_STATUS: 'success'
+
+    - name: Notify discord failure
+      uses: th0th/notify-discord@v0.4.1
+      if: ${{ failure() }}
+      env:
+        DISCORD_WEBHOOK_URL: ${{ inputs.discord_webhook }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_JOB_NAME: "Build and deploy"
+        GITHUB_JOB_STATUS: 'failure'

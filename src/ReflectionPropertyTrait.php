@@ -4,7 +4,7 @@ namespace GollumSF\ReflectionPropertyTest;
 
 trait ReflectionPropertyTrait
 {
-    public function reflectionGetValue($obj, string $propertyKey, $objClass = null)
+    public function reflectionGetValue(object $obj, string $propertyKey, ?string $objClass = null): mixed
     {
         if (!$objClass) {
             $objClass = get_class($obj);
@@ -14,11 +14,10 @@ trait ReflectionPropertyTrait
         }
         $rClass = new \ReflectionClass($objClass);
         $rProp = $rClass->getProperty($propertyKey);
-        $rProp->setAccessible(true);
         return $rProp->getValue($obj);
     }
 
-    public function reflectionSetValue($obj, string $propertyKey, $value, $objClass = null)
+    public function reflectionSetValue(object $obj, string $propertyKey, mixed $value, ?string $objClass = null): void
     {
         if (!$objClass) {
             $objClass = get_class($obj);
@@ -28,11 +27,10 @@ trait ReflectionPropertyTrait
         }
         $rClass = new \ReflectionClass($objClass);
         $rProp = $rClass->getProperty($propertyKey);
-        $rProp->setAccessible(true);
         $rProp->setValue($obj, $value);
     }
 
-    public function reflectionCallMethod($obj, string $methodName, array $params = [], $objClass = null)
+    public function reflectionCallMethod(object $obj, string $methodName, array $params = [], ?string $objClass = null): mixed
     {
         if (!$objClass) {
             $objClass = get_class($obj);
@@ -42,7 +40,6 @@ trait ReflectionPropertyTrait
         }
         $rClass = new \ReflectionClass($objClass);
         $rMethod = $rClass->getMethod($methodName);
-        $rMethod->setAccessible(true);
         return $rMethod->invokeArgs($obj, $params);
     }
 

@@ -11,66 +11,66 @@ class ReflectionPropertyClass {
 
 class DummyClass {
 
-	private $privateValue = 'PRIVATE_VALUE';
-	private $protectedValue = 'PROTECTED_VALUE';
+	private string $privateValue = 'PRIVATE_VALUE';
+	private string $protectedValue = 'PROTECTED_VALUE';
 
-	public function getPrivateValue() {
+	public function getPrivateValue(): string {
 		return $this->privateValue;
 	}
 
-	public function getProtectedValue() {
+	public function getProtectedValue(): string {
 		return $this->protectedValue;
 	}
 
-	private function privateFunctionNoArg() {
+	private function privateFunctionNoArg(): string {
 		return 'PRIVATE_FUNCTION_NO_ARG';
 	}
 
-	private function protectedFunctionNoArg() {
+	private function protectedFunctionNoArg(): string {
 		return 'PROTECTED_FUNCTION_NO_ARG';
 	}
 
-	private function privateFunctionArgs($arg) {
+	private function privateFunctionArgs(string $arg): string {
 		return 'PRIVATE_FUNCTION_'.$arg;
 	}
 
-	private function protectedFunctionArgs($arg) {
+	private function protectedFunctionArgs(string $arg): string {
 		return 'PROTECTED_FUNCTION_'.$arg;
 	}
-	
+
 }
 
 class SubDummyClass extends DummyClass {
 }
 
 class ProxyDummyClass extends DummyClass implements Proxy {
-	public function __load() {}
-	public function __isInitialized() {}
+	public function __load(): void {}
+	public function __isInitialized(): bool { return true; }
 }
 
 interface SubProxy extends Proxy {
 }
 
 class SubProxyDummyClass extends DummyClass implements SubProxy {
-	public function __load() {}
-	public function __isInitialized() {}
+	public function __load(): void {}
+	public function __isInitialized(): bool { return true; }
 }
 
 
 
 class ReflectionPropertyTraitTest extends TestCase
 {
-	public function testReflectionGetValue() {
-		
+	public function testReflectionGetValue(): void {
+
 		$obj = new DummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
 
 		$this->assertEquals($reflectionPropertyClass->reflectionGetValue($obj, 'privateValue'), 'PRIVATE_VALUE');
 		$this->assertEquals($reflectionPropertyClass->reflectionGetValue($obj, 'protectedValue'), 'PROTECTED_VALUE');
-		
+
 	}
 
-	public function testReflectionGetValueSubClass() {
+	public function testReflectionGetValueSubClass(): void {
 
 		$obj = new SubDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -80,7 +80,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionGetValueProxy() {
+	public function testReflectionGetValueProxy(): void {
 
 		$obj = new ProxyDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -90,7 +90,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionGetValueSubProxy() {
+	public function testReflectionGetValueSubProxy(): void {
 
 		$obj = new SubProxyDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -100,7 +100,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionSetValue() {
+	public function testReflectionSetValue(): void {
 
 		$obj = new DummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -113,7 +113,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionSetValueSubClass() {
+	public function testReflectionSetValueSubClass(): void {
 
 		$obj = new SubDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -126,7 +126,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionSetValueProxy() {
+	public function testReflectionSetValueProxy(): void {
 
 		$obj = new ProxyDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -139,7 +139,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionSetValueSubProxy() {
+	public function testReflectionSetValueSubProxy(): void {
 
 		$obj = new SubProxyDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -152,7 +152,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionCallMethod() {
+	public function testReflectionCallMethod(): void {
 
 		$obj = new DummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -164,7 +164,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionCallMethodSubClass() {
+	public function testReflectionCallMethodSubClass(): void {
 
 		$obj = new SubDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -176,7 +176,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionCallMethodProxy() {
+	public function testReflectionCallMethodProxy(): void {
 
 		$obj = new ProxyDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
@@ -188,7 +188,7 @@ class ReflectionPropertyTraitTest extends TestCase
 
 	}
 
-	public function testReflectionCallMethodSubProxy() {
+	public function testReflectionCallMethodSubProxy(): void {
 
 		$obj = new SubProxyDummyClass();
 		$reflectionPropertyClass = new ReflectionPropertyClass();
